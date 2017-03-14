@@ -46,9 +46,6 @@ public class CompetitorDao {
                 competitor.setId(rs.getInt("id"));
                 competitor.setName(rs.getString("name"));
                 competitor.setIntroduction(rs.getString("introduction"));
-                if(rs.getString("group") != null){
-                    competitor.setGroup(rs.getInt("group"));
-                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -56,12 +53,29 @@ public class CompetitorDao {
         return competitor;
     }
 
+    /**
+     * 修改选手信息
+     * @param competitor
+     * @param id
+     */
     public void updateById(Competitor competitor,int id){
         DBConn dbConn = new DBConn();
         String sql = "UPDATE t_competitor SET name = ?,introduction = ? ";
         dbConn.preparedStatement(sql);
         dbConn.setString(1,competitor.getName());
         dbConn.setString(2,competitor.getIntroduction());
+        dbConn.executeUpdate();
+        dbConn.close();
+    }
+
+    /**
+     * 删除选手信息
+     * @param id
+     */
+    public void deleteById(int id) {
+        DBConn dbConn = new DBConn();
+        String sql = "DELETE t_competitor WHERE id = " + id;
+        dbConn.preparedStatement(sql);
         dbConn.executeUpdate();
         dbConn.close();
     }
@@ -81,7 +95,6 @@ public class CompetitorDao {
                 competitor.setId(rs.getInt("id"));
                 competitor.setName(rs.getString("name"));
                 competitor.setIntroduction(rs.getString("introduction"));
-                competitor.setGroup(rs.getInt("group"));
                 list.add(competitor);
             }
         } catch (SQLException e) {
