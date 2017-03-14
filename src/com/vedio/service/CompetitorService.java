@@ -2,7 +2,6 @@ package com.vedio.service;
 
 import com.vedio.dao.CompetitorDao;
 import com.vedio.entity.Competitor;
-
 import java.util.List;
 
 /**
@@ -39,6 +38,10 @@ public class CompetitorService {
         competitorDao.updateById(competitor,id);
     }
 
+    /**
+     * 删除一个选手的信息
+     * @param id
+     */
     public void deleteById(int id){
         competitorDao.deleteById(id);
     }
